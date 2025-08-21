@@ -1,7 +1,7 @@
 from player import Player
 from bank import deposit, withdraw
 from roulette import play_roulette
-from storage import save_player_json, load_player_json
+from data import save_player_json, load_player_json
 
 # Ask player name and try to load previous game
 name = input("Enter your name: ")
