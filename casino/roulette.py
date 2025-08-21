@@ -17,7 +17,6 @@ def play_roulette(player):
         bet_input = input(
             f"How much do you want to bet? Current balance: {player.balance} (or type 'exit' to go back): "
         )
-
         if bet_input.lower() == "exit":
             print("Returning to main menu...")
             return  # exit the game
@@ -32,23 +31,23 @@ def play_roulette(player):
             print("Invalid bet! Try again.")
             continue
 
-        # Ask for the number
+        # Ask for the number (0-6)
         try:
-            number = int(input("Choose a number between 0 and 36: "))
+            number = int(input("Choose a number between 0 and 6: "))
         except ValueError:
             print("Invalid number! Try again.")
             continue
-        if number < 0 or number > 36:
+        if number < 0 or number > 6:
             print("Invalid number! Try again.")
             continue
 
-        # Generate random result
-        result = random.randint(0, 36)
+        # Generate random result (0-6)
+        result = random.randint(0, 6)
         print(f"The result is: {result}")
 
         # Calculate gain/loss
         if result == number:
-            gain = bet * 35
+            gain = bet * 6  # payout for correct number
             player.balance += gain
             print(
                 f"Congratulations {player.name}, you won {gain}! New balance: {player.balance}."
