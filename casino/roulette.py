@@ -1,78 +1,80 @@
+# roulette.py
 import random
 
 
 def play_roulette(player):
-    print(f"Bienvenue à la roulette, {player.nom}!")
-    # Logique de jeu de roulette ici
+    print(f"\nWelcome to Roulette, {player.name}!")
+
     while True:
-        # demande la mise
-        try:
-            mise = int(
-                input(
-                    f"Combien voulez-vous miser? Votre solde actuel est {player.solde}: "
-                )
-            )
-        except ValueError:
-            print("Mise invalide! Essayez à nouveau.")
-            continue
-        if mise > player.solde or mise <= 0:
-            print("Mise invalide! Essayez à nouveau.")
-            continue
-
-        # demande le numéro choisi
-        try:
-            numero = int(input("Choisissez un numéro entre 0 et 36: "))
-        except ValueError:
-            print("Numéro invalide! Essayez à nouveau.")
-            continue
-        if numero < 0 or numero > 36:
-            print("Numéro invalide! Essayez à nouveau.")
-            continue
-
-        # génère un nombre aléatoire
-        resultat = random.randint(0, 36)
-        print(f"Le résultat est: {resultat}")
-
-        # calcule le gain/perte
-        if resultat == numero:
-            gain = mise * 35
-            player.solde += gain
+        # Check if balance is zero
+        if player.balance <= 0:
             print(
-                f"Félicitations {player.nom}, vous avez gagné {gain}! "
-                f"Votre solde actuel est {player.solde}."
+                "Your balance is 0. You cannot play roulette. Please deposit first or return to the main menu."
+            )
+            return  # exit back to main menu
+
+        # Ask for the bet
+        bet_input = input(
+            f"How much do you want to bet? Current balance: {player.balance} (or type 'exit' to go back): "
+        )
+
+        if bet_input.lower() == "exit":
+            print("Returning to main menu...")
+            return  # exit the game
+
+        try:
+            bet = int(bet_input)
+        except ValueError:
+            print("Invalid bet! Try again.")
+            continue
+
+        if bet <= 0 or bet > player.balance:
+            print("Invalid bet! Try again.")
+            continue
+
+        # Ask for the number
+        try:
+            number = int(input("Choose a number between 0 and 36: "))
+        except ValueError:
+            print("Invalid number! Try again.")
+            continue
+        if number < 0 or number > 36:
+            print("Invalid number! Try again.")
+            continue
+
+        # Generate random result
+        result = random.randint(0, 36)
+        print(f"The result is: {result}")
+
+        # Calculate gain/loss
+        if result == number:
+            gain = bet * 35
+            player.balance += gain
+            print(
+                f"Congratulations {player.name}, you won {gain}! New balance: {player.balance}."
             )
         else:
-            gain = -mise
-            player.solde += gain
+            gain = -bet
+            player.balance += gain
             print(
-                f"Désolé {player.nom}, vous avez perdu {mise}! "
-                f"Votre solde actuel est {player.solde}."
+                f"Sorry {player.name}, you lost {bet}! New balance: {player.balance}."
             )
 
-        # ajoute une entrée complète dans l’historique
-        player.historique.append(
+        # Add to history
+        player.add_history(
             {
-                "jeu": "roulette",
-                "mise": mise,
-                "choix": numero,
-                "résultat": resultat,
+                "game": "roulette",
+                "bet": bet,
+                "choice": number,
+                "result": result,
                 "gain": gain,
-                "solde_final": player.solde,
+                "final_balance": player.balance,
             }
         )
 
-        # demande si le joueur veut rejouer
-        rejouer = input("Voulez-vous rejouer? (y/n): ")
-        if rejouer.lower() != "y":
+        # Ask if the player wants to play again
+        replay = input("Do you want to play again? (y/n): ")
+        if replay.lower() != "y":
             break
 
-    # affiche l’historique complet
-    print("\nVoici votre historique de jeu:")
-    for entry in player.historique:
-        print(
-            f"- Mise {entry['mise']} sur {entry['choix']} "
-            f"→ Résultat {entry['résultat']} "
-            f"→ Gain {entry['gain']} | Solde: {entry['solde_final']}"
-        )
-
-    print("\nMerci d'avoir joué à la roulette!")
+    print("\nThank you for playing Roulette!")
