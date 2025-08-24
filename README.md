@@ -12,6 +12,8 @@ casino/
 │── player.py # Classe Joueur (nom, solde, mises…)
 │── roulette.py # Jeu de roulette (tirage, règles, gains…)
 │── bank.py # Gestion d’argent et transactions
+│── data.py # System de sauvgarder
+
 ```
 
 ---
@@ -44,8 +46,6 @@ python3 main.py
 Ajouter d’autres jeux de casino (blackjack, poker, etc.)
 
 Interface graphique (Tkinter, PyQt, ou Pygame)
-
-Système de sauvegarde des parties
 
 Mode multijoueur
 
