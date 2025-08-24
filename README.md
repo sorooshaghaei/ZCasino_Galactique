@@ -1,10 +1,60 @@
-# ZCasino_Galactique
-Le jeu ZCasino
+# 🎰 ZCasino Galactique
 
-structure:
+Un petit projet de simulation de **casino** en Python.  
+Le jeu principal est la **roulette**, avec gestion de joueur et de banque.
+
+---
+
+## 📂 Structure du projet
+```
 casino/
-│── main.py          (le point d’entrée)
-│── player.py        (classe Joueur)
-│── roulette.py      (le jeu de roulette)
-│── bank.py          (gestion d’argent)
-│── utils.py         (fonctions utilitaires, ex: sauvegarde/chargement)
+│── main.py # Point d’entrée du programme
+│── player.py # Classe Joueur (nom, solde, mises…)
+│── roulette.py # Jeu de roulette (tirage, règles, gains…)
+│── bank.py # Gestion d’argent et transactions
+```
+
+---
+
+## 🚀 Installation & Exécution
+
+Clonez le projet :
+
+```bash
+git clone https://github.com/votre-utilisateur/ZCasino_Galactique.git
+cd ZCasino_Galactique/casino
+```
+
+
+---
+
+
+Lancez le jeu :
+```bash
+python3 main.py
+```
+
+
+---
+
+
+
+📌 Améliorations possibles
+
+Ajouter d’autres jeux de casino (blackjack, poker, etc.)
+
+Interface graphique (Tkinter, PyQt, ou Pygame)
+
+Système de sauvegarde des parties
+
+Mode multijoueur
+
+
+---
+
+
+
+📝 Licence
+
+Projet open-source — utilisez et modifiez librement 🚀
+
